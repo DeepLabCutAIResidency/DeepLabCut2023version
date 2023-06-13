@@ -4,7 +4,7 @@ In this notebook, we will have a rundown on the following pose config parameters
 
 # 2. What is *pose_cfg.yml*?
 <a id="whatisposecfg"></a>
-The `pose_cfg.yaml` file offers easy access to a range of training parameters that the user may want or have to adjust depending on the used dataset and task. This recipe is aimed at giving an average user an intuition on those hyperparameters and situations in which adressing them can be useful
+The `pose_cfg.yaml` file offers easy access to a range of training parameters that the user may want or have to adjust depending on the used dataset and task. This recipe is aimed at giving an average user an intuition on those hyperparameters and situations in which addressing them can be useful.
 
 # 3. Full parameter list
 <a id="fullparamlist"></a>
@@ -37,46 +37,46 @@ The `pose_cfg.yaml` file offers easy access to a range of training parameters th
 
 <a id="input_size"></a>
 ### 3.1.A `max_input_size` and `min_input_size`
-The default values are `1500` and `64` respectively. 
+The default values are `1500` and `64`, respectively. 
 
 💡Pro-tip:💡
-- change `max_input_size` when resolution of the video is higher than 1500x1500 or when `scale_jitter_up` will possibly go over that value
-- change `min_input_size` when resolution of the video is smaller than 64x64 or when `scale_jitter_lo` will possibly go below that value
+- change `max_input_size` when the resolution of the video is higher than 1500x1500 or when `scale_jitter_up` will possibly go over that value
+- change `min_input_size` when the resolution of the video is smaller than 64x64 or when `scale_jitter_lo` will possibly go below that value
 
 <a id="global_scale"></a>
 ### 3.1.B `global_scale`
 The default value is `0.8`. It's the most basic, first scaling that happens to all images in the training queue.
 
 💡Pro-tip:💡
-- With images that are low resolution or lack detail, it may be beneficial to increase the `global_scale` to 1, to keep original size and retain as much information as possible.
+- With images that are low resolution or lack detail, it may be beneficial to increase the `global_scale` to 1, to keep the original size and retain as much information as possible.
 
 ### 3.1.C `batch_size`
 <a id="batch_size"></a>
 
-The default for single animal projects is 1 and for maDLC projects it's `8`. It's the number of frames used per training iteration.
+The default for single animal projects is 1, and for maDLC projects it's `8`. It's the number of frames used per training iteration.
 
-In both cases you can increase the batchsize up to the limit of your GPU memory and train for a lower number of iterations. The relationship between number of iterations and `batch_size` is not linear so `batch_size: 8` doesn't mean you can train for 8x less iterations, but like with every training, plateauing loss can be treated as an indicator of reaching optimal performance.
+In both cases, you can increase the batchsize up to the limit of your GPU memory and train for a lower number of iterations. The relationship between the number of iterations and `batch_size` is not linear so `batch_size: 8` doesn't mean you can train for 8x less iterations, but like with every training, plateauing loss can be treated as an indicator of reaching optimal performance.
 
 💡Pro-tip:💡
 - Having a higher `batch_size` can be beneficial in terms of models' generalization
 
 ___________________________________________________________________________________
 
-Values mentioned above and the augmenatation parameters are often intuitive and knowing our own data we are able to decide on what will and won't be beneficial. Unfortunately, not all hyperparameters are this simple or intuitive. Two of the parameters that might require some tuning on challanging datasets are `pafwidth` and `pos_dist_thresh`. 
+Values mentioned above and the augmentation parameters are often intuitive, and knowing our own data, we are able to decide on what will and won't be beneficial. Unfortunately, not all hyperparameters are this simple or intuitive. Two parameters that might require some tuning on challenging datasets are `pafwidth` and `pos_dist_thresh`. 
 
 <a id="pos"></a>
 ### 3.1.D `pos_dist_thresh`
-The default value is `17`. It's the size of a window withing which detections are considered positive training samples, meaning they tell the model, that it's going in the right direction. 
+The default value is `17`. It's the size of a window within which detections are considered positive training samples, meaning they tell the model that it's going in the right direction. 
 
 <a id="paf"></a>
 ### 3.1.E `pafwidth`
-The default value is `20`. PAF stands for part affinity fields. It is a method of learning associations between pairs of bodyparts by preserving location and orientation of the limb (connection between two keypoints). This learned part affinity helps in proper animal assembly, making the model less prone to associating bodyparts of one individual with those of another. [1](#ref1)
+The default value is `20`. PAF stands for part affinity fields. It is a method of learning associations between pairs of bodyparts by preserving the location and orientation of the limb (the connection between two keypoints). This learned part affinity helps in proper animal assembly, making the model less prone to associating bodyparts of one individual with those of another. [1](#ref1)
 
 <a id="data_aug"></a>
 ## 3.2 Data augmentation parameters
-In the simplest form, we can think of data augmentation as something similar to imagination or dreaming. Humans imagine diferent scenarios based on experience, ultimately allowing us to gain a better understanding of our world. [2, 3, 4](#references)
+In the simplest form, we can think of data augmentation as something similar to imagination or dreaming. Humans imagine different scenarios based on experience, ultimately allowing us to better understand our world. [2, 3, 4](#references)
 
-In a similar way, we train our models to different types of "imagined" scenarios, which we limit to the foreseeable ones, so we ultimately get a robust model that can more likely handle new data and scenes. 
+Similarly, we train our models to different types of "imagined" scenarios, which we limit to the foreseeable ones, so we ultimately get a robust model that can more likely handle new data and scenes. 
 
 Classes of data augmentations, characterized by their nature, are given by:
 - [**Geometric transformations**](#geometric)
@@ -98,7 +98,7 @@ Classes of data augmentations, characterized by their nature, are given by:
 
 <a id="scale_jitter"></a>
 ### 3.2.1 `scale_jitter_lo` and `scale_jitter_up`
-*Scale jittering* resizes an image within a given resize range. This allows the model to learn from different sizes of objects in the scene, therefore increasing its robustness to generalize especially on newer scenes or object sizes.
+*Scale jittering* resizes an image within a given resize range. This allows the model to learn from different sizes of objects in the scene, therefore increasing its robustness to generalize, especially on newer scenes or object sizes.
 
 The image below, retrieved from [3](#ref3), illustrates the difference between two scale jittering methods.
 
@@ -109,7 +109,7 @@ During training, each image is randomly scaled within the range `[scale_jitter_l
 - `scale_jitter_up = 1.25`
 
 💡Pro-tips:💡
-- ⭐⭐⭐ If the target animal/s do not have an incredibly high variance in size throughout the video (e.g. jumping or moving towards the static camera), keeping the **default** values **unchanged** will give just enough variability in the data for the model to generalize better ✅
+- ⭐⭐⭐ If the target animal/s do not have an incredibly high variance in size throughout the video (e.g., jumping or moving towards the static camera), keeping the **default** values **unchanged** will give just enough variability in the data for the model to generalize better ✅
 
 - ⭐⭐However, you may want to adjust these parameters if you want your model to:
   - handle new data with possibly **larger (25% bigger than original)** animal subjects ➡️ in this scenario, increase the value of *scale_jitter_up*
@@ -120,9 +120,9 @@ During training, each image is randomly scaled within the range `[scale_jitter_l
 
 <a id="rot"></a>
 ### 3.1.2 `rotation`
-*Rotation augmentations* are done by rotating the image right or left on an axis between $1^{\circ}$ and $359^{\circ}$. Te safety of rotation augmentations is heavily determined by the rotation degree parameter. Slight rotations such as between $+1^{\circ}$ and $+20^{\circ}$ or $-1^{\circ}$ to $-20^{\circ}$ is generally an acceptable range. Keep in mind that as the rotation degree increases, the precision of the label placement can decrease 
+*Rotation augmentations* are done by rotating the image right or left on an axis between $1^{\circ}$ and $359^{\circ}$. The safety of rotation augmentations is heavily determined by the rotation degree parameter. Slight rotations such as between $+1^{\circ}$ and $+20^{\circ}$ or $-1^{\circ}$ to $-20^{\circ}$ is generally an acceptable range. Keep in mind that as the rotation degree increases, the precision of the label placement can decrease 
 
-The image below retreived from [2](#ref2) illustrates the difference between the different rotation degrees.
+The image below, retrieved from [2](#ref2), illustrates the difference between the different rotation degrees.
 ![augset_rot.png](attachment:augset_rot.png)
 
 During training, each image is rotated $+/-$ the `rotation` degree parameter set. By default, this parameter is set to `25`, which means that the images are augmented with a $+25^{\circ}$ rotation of itself and a $-25^{\circ}$ degree rotation of itself. Should you want to opt out of this augmentation, set the rotation value to `False`.
@@ -132,7 +132,7 @@ During training, each image is rotated $+/-$ the `rotation` degree parameter set
 
 - However, you may want to adjust this parameter if you want your model to:
   - handle new data with new rotations of the animal subjects 
-  - handle the possibly unlabelled rotations of your minimally-labelled data 
+  - handle the possibly unlabelled rotations of your minimally-labeled data 
   - But as a consequence, the more you increase the rotation degree, the more the original keypoint labels may not be preserved
 
 <a id="rotratio"></a>
@@ -144,13 +144,13 @@ This parameter in the DLC module is given by the percentage of sampled data to b
 
 <a id="fliplr"></a>
 ### 3.2.4 `fliplr` (or a horizontal flip)
-**Mirroring** or otherwise called **horizontal axis fipping** is much more common than fipping the vertical axis. This augmentation is one of the easiest to implement and has proven useful on datasets such as CIFAR-10 and ImageNet. However, on datasets involving text recognition such as MNIST or SVHN, this is not a label-preserving transformation.
+**Mirroring**, otherwise called **horizontal axis fipping**, is much more common than flipping the vertical axis. This augmentation is one of the easiest to implement and has proven useful on datasets such as CIFAR-10 and ImageNet. However, on datasets involving text recognition, such as MNIST or SVHN, this is not a label-preserving transformation.
 
-The image below is an illustration of this property (shown on the right most column).
+The image below is an illustration of this property (shown on the right-most column).
 ![augset_flip.png](attachment:augset_flip.png)
 
 This parameter randomly flips an image horizontally to augment training data.
-By default, this parameter is set to `False` especially on poses with mirror symmetric joints (for example, so the left  hand and right hand are not swapped).
+By default, this parameter is set to `False` especially on poses with mirror symmetric joints (for example, so the left hand and right hand are not swapped).
 
 💡Pro-tip:💡
 - ⭐ If you work with labels with symmetric joints, keep the **default** value **unchanged** - unless the dataset is biased (animal moves mostly in one direction, but sometimes in the opposite)✅
@@ -160,15 +160,15 @@ By default, this parameter is set to `False` especially on poses with mirror sym
 ### 3.2.5 `crop_size`
 Cropping consists of removing unwanted pixels from the image, thus selecting a part of the image and discarding the rest, reducing the size of the input. 
 
-In DeepLabCut *pose_config.yaml* file, by default `crop_size` is set to (`400,400`), width and height respectively. This means it will cut out parts of an image of this size.
+In DeepLabCut *pose_config.yaml* file, by default, `crop_size` is set to (`400,400`), width, and height, respectively. This means it will cut out parts of an image of this size.
 
 💡Pro-tip:💡
- - If your images are very large, you could consider increasing the crop size. However, be aware that you'll need a strong GPU or you will hit memory errors!
+ - If your images are very large, you could consider increasing the crop size. However, be aware that you'll need a strong GPU, or you will hit memory errors!
  - If your images are very small, you could consider decreasing the crop size. 
 
 <a id ="cropratio"></a>
 ### 3.2.6 `crop_ratio`
- Also, the number of frames to be cropped is defined by the variable `cropratio`, which by default is set to `0.4`. That means that there is a $40\%$ the images within current batch will be cropped. By default this value works well. 
+ Also, the number of frames to be cropped is defined by the variable `cropratio`, which is set to `0.4` by default. That means that there is a $40\%$ the images within the current batch will be cropped. By default, this value works well. 
 
  <a id ="max_shift"></a>
 ### 3.2.7 `max_shift`
@@ -184,9 +184,9 @@ The image below is modified from
 Likewise, there are different cropping sampling methods (`crop_sampling`), we can use depending on how our image looks like. 
 
 💡Pro-tips💡
-- For highly crowded scenes `hybrid` and `density` approaches will work best. 
+- For highly crowded scenes, `hybrid` and `density` approaches will work best. 
 - `uniform` will take out random parts of the image, disregarding the annotations completely
-- 'keypoint' centers on a random keypoint and crops based on that location - might be best in preserving whole animal (if reasonable `crop_size` is used)
+- 'keypoint' centers on a random keypoint and crops based on that location - might be best in preserving the whole animal (if reasonable `crop_size` is used)
 
 <a id ="kernel"></a>
 ### Kernel transformations 
@@ -194,7 +194,7 @@ Kernel filters are very popular in image processing to sharpen and blur images. 
 
 <a id ="sharp"></a>
 ### 3.2.9 `sharpening` and `sharpenratio`
-In DeepLabCut *pose_config.yaml* file, by default `sharpening` is set to `False`, but if we want to use this type of data augmentation, we can set it `True` and specify a value for `sharpenratio`, which by default is set to `0.3`. Blurring is not defined in the *pose_config.yaml*, but if the user finds it convenient, it can be added to the data augmentation pipeline. 
+In DeepLabCut *pose_config.yaml* file, by default, `sharpening` is set to `False`, but if we want to use this type of data augmentation, we can set it `True` and specify a value for `sharpenratio`, which by default is set to `0.3`. Blurring is not defined in the *pose_config.yaml*, but if the user finds it convenient, it can be added to the data augmentation pipeline. 
 
 The image below is modified from 
 [2](#references). 
@@ -202,7 +202,7 @@ The image below is modified from
 
 <a id ="edge"></a>
 ### 3.2.10 `edge`
-Concerning sharpeness, we have an additional parameter, `edge` enhancement, which enhances edge contrast of an image to improve its apparent sharpness. Likewise, by default this parameter is set `False`, but if you want to include it you just need to set it `True`.
+Concerning sharpness, we have an additional parameter, `edge` enhancement, which enhances the edge contrast of an image to improve its apparent sharpness. Likewise, by default, this parameter is set `False`, but if you want to include it, you just need to set it `True`.
 
 # References 
 <ol id="references">
