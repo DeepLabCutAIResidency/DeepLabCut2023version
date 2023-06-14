@@ -30,7 +30,7 @@ To accomplish this, you need the following installed:
     ```
 
 ## Steps
-1. Double check for spelling and grammatical errors (on [Grammarly](#https://grammarly.com/) or by using Jupyter notebook's spellcheck extension called `spellchecker`).
+1. Double check for spelling and grammatical errors (on Grammarly - https://grammarly.com/ or by using Jupyter notebook's spellcheck extension called `spellchecker`).
     ***
     ```
     jupyter nbextension enable spellchecker/main
@@ -44,7 +44,7 @@ To accomplish this, you need the following installed:
     jupyter nbconvert --to markdown [notebook.ipynb]
     ```
     ***
-<img src="nbconvert.png"></img>
+    <img src="nbconvert.png"></img>
 
 3. Move your newly converted Markdown file (.md) to directory: `docs/recipes/`
     ***
@@ -58,26 +58,26 @@ To accomplish this, you need the following installed:
       - file: docs/recipes/pose_cfg_file_breakdown
     ```
     ***
-<img src="update_toc.png"></img>
+    <img src="update_toc.png"></img>
 5.  Build your notebook into the DLC recipe book
     ***
     ```
-    jupyter book build /absolute/path/to/the/DLC/repoDeepLabCut2023version
+        jupyter book build /absolute/path/to/the/DLC/repoDeepLabCut2023version
     ```
     ***
     Example:
     ***
     ```
-    jupyter book build /Users/rae/DeepLabCut2023version
+     jupyter book build /Users/rae/DeepLabCut2023version
     ```
     ***
     The build log should look like below:
-    <img src="jupyter_book_build.png"></img><br/>
+    <img src="jupyter_book_build.png"></img>
 
-5. Test locally by checking the `index.html` file in `/Users/rae/Desktop/DeepLabCut2023version/_build/html/`
+6. Test locally by checking the `index.html` file in `/Users/rae/Desktop/DeepLabCut2023version/_build/html/`
 <img src="build_result.png"></img>
 
-6. When everything is a-okay, commit to Git. If not, edit your file and go to back to step 1.
+7. When everything is a-okay, commit to Git. If not, edit your file and go to back to step 1.
     
     **`git status`** to check the local changes in your current project
     ```
@@ -100,6 +100,6 @@ To accomplish this, you need the following installed:
     ```
     git push
     ```
-5. When everything's clear, confirm your pull request on the Git website: https://github.com/DeepLabCutAIResidency/DeepLabCut2023version
+8. When everything's clear, confirm your pull request on the Git website: https://github.com/DeepLabCutAIResidency/DeepLabCut2023version
 
 ## All done!
