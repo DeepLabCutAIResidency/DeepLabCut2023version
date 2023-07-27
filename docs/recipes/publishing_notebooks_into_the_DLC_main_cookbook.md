@@ -15,8 +15,7 @@ To accomplish this, you need the following installed:
     You can do this by running the following command:
     ***
     ```
-    pip install jupyter-book numpydoc nbconvert jupyter_contrib_nbextensions
-    jupyter contrib nbextension install --user
+    pip install deeplabcut[docs]
     ```
     ***
 **Relevant Git repos:**
